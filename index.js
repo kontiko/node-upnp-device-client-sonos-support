@@ -136,7 +136,10 @@ DeviceClient.prototype.callAction = function(serviceId, actionName, params, call
 
         if(res.statusCode !== 200) {
           var errorCode = doc.findtext('.//errorCode');
-          var errorDescription = doc.findtext('.//errorDescription').trim();
+          var errorDescription = doc.findtext('.//errorDescription');
+          if (errorDescription){
+            errorDescription.trim();
+          }
 
           var err = new Error(errorDescription + ' (' + errorCode + ')');
           err.code = 'EUPNP';
